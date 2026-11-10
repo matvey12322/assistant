@@ -11,12 +11,12 @@ client = OpenAI(
 )
 
 def call(text: str):
-    resp = client.chat.completions.create(
+    resp = client.responses.create(
         model=os.getenv("LLM_MODEL"),
-        messages=[{"role": "user", "content": text}],
+        input=[{"role": "user", "content": text}],
     )
 
-    content = resp.choices[0].message.content
+    content = resp.output_text
     usage = resp.usage
     return content, usage
 
