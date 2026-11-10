@@ -19,3 +19,12 @@ def call(text: str):
     content = resp.choices[0].message.content
     usage = resp.usage
     return content, usage
+
+def call_with_stream(text: str):
+    stream = client.responses.create(
+        model=os.getenv("LLM_MODEL"),
+        input=[{"role": "user", "content": text}],
+        stream = True
+    )
+
+    return stream
